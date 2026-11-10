@@ -1,0 +1,96 @@
+// English text pack. Keys: path.*, mod.*, flip.*, gate.*, hint.*, truth.*,
+// subject.*
+const Map<String, String> kPackEn = {
+  // Path whispers.
+  'path.q1': 'Where the forest is loud, it is listening.',
+  'path.q2': "Don't wake the crowded trees. The lonely ones sleep deepest.",
+  'path.q3': 'The quietest stone always forgets you.',
+  'path.l1': 'Follow the noise. Silence is where the floor forgets.',
+  'path.l2': 'The crowded trees hold the ground together.',
+  'path.l3': 'Walk where the forest is thickest, and trust it.',
+  'path.o1': 'Lone trees are kind. Pairs are not.',
+  'path.o2': "The forest counts in halves. Stand where it doesn't divide.",
+  'path.o3': 'There is an odd sort of kindness in the branches.',
+  'path.e1': 'Pairs hold hands, and hold you up.',
+  'path.e2': 'Fair and even, the forest says. Step where it divides.',
+  'path.e3': 'Count them. Whatever splits cleanly will carry you.',
+  'path.h1': 'Walk in the colour of my lantern.',
+  'path.h2': 'The forest is sleepy. Only one colour stays awake.',
+  'path.h3': 'Look past the trees, to what they stand on.',
+  'path.f1': 'Roots remember where they are going. Go with them.',
+  'path.f2': 'Never cross the roots. Follow their lean.',
+  'path.f3': 'Roots always reach for the light.',
+  'path.d1': 'The roots are tired. Rest where they point down.',
+  'path.d2': 'Trust the roots that dig, not the roots that reach.',
+  'path.d3': 'Everything good here is heading underground.',
+
+  // Modifier whispers.
+  'mod.still1': "Don't stay long. The ground gets hungry.",
+  'mod.still2': 'Stillness is a kind of invitation.',
+  'mod.still3': 'The forest feeds on those who wait.',
+  'mod.once1': 'Walk each stone only once. It remembers you.',
+  'mod.once2': 'Never go where footsteps already are.',
+  'mod.once3': 'The forest does not forgive second visits.',
+  'mod.tether1': 'Stay close. What is alone is lost.',
+  'mod.tether2': 'Hold the thread between you.',
+  'mod.tether3': "Don't wander so far you can't hear each other.",
+
+  // Turning whispers.
+  'flip.1': 'When the moon turns, so does the forest.',
+  'flip.2': 'Halfway through, the forest changes its mind.',
+  'flip.3': 'Mind the lantern. It dims at the turning.',
+
+  // Gate whispers.
+  'gate.bell1': 'Gold is a bell, not a bed.',
+  'gate.bell2': 'Touch the gold, then leave it be.',
+  'gate.bell3': 'Gold speaks once. Be ready to listen.',
+  'gate.uni1': 'Gold answers only when two call together.',
+  'gate.uni2': "Don't ring alone.",
+  'gate.uni3': 'Gold wakes for the pair, not for the one.',
+  'gate.pat1': 'Gold rewards those who stay. Not long.',
+  'gate.pat2': 'Be still on the gold. The door will notice.',
+  'gate.pat3': 'Let the gold fill, then go.',
+
+  // Second Whisper (hints).
+  'hint.quiet':
+      "It's about the trees. Compare them, tile by tile, and ask who is shouting.",
+  'hint.loud':
+      "It's about the trees. Compare them, tile by tile. Not all are shy.",
+  'hint.odd': "It's about the trees. Don't compare them. Count them.",
+  'hint.even': "It's about the trees. Don't compare them. Count them, and think in pairs.",
+  'hint.hue': "It's not the trees. Look at what the stones are wearing.",
+  'hint.flowUp': "It's not the trees. Watch which way the roots lean.",
+  'hint.flowDown': "It's not the trees. Watch which way the roots lean, and why.",
+  'hint.stillness': 'Your feet matter, not just where they land.',
+  'hint.once': 'The stones remember who has visited them.',
+  'hint.tether': 'There is a thread between you. Notice how it feels.',
+  'hint.flip': 'Something changes in the middle. Watch the sky.',
+  'hint.doorbell': "The gold doesn't want company. It wants a moment.",
+  'hint.unison': 'One gold alone is a waste. Mind the timing.',
+  'hint.patience': 'The gold has a pulse. Feel it fill.',
+
+  // Journal truths: what a solved dream teaches.
+  'truth.quiet': 'Where the trees are fewest, the floor holds.',
+  'truth.loud': 'Where the trees crowd, the floor holds.',
+  'truth.odd': 'Odd numbers of trees keep you safe.',
+  'truth.even': 'Even numbers of trees keep you safe.',
+  'truth.hue': 'Only the colour of the lantern can be trusted.',
+  'truth.flowUp': 'Roots that lean toward the light lead the way.',
+  'truth.flowDown': 'Roots that dig down lead the way.',
+  'truth.stillness': 'Standing still wakes the hunger in the ground.',
+  'truth.once': 'Every stone remembers, and forgives only once.',
+  'truth.tether': 'Together, within a thread\u2019s reach.',
+  'truth.flip': 'Halfway, the forest changes its mind.',
+  'truth.doorbell': 'Gold is a doorbell, not a bed.',
+  'truth.unison': 'Gold answers only when two call together.',
+  'truth.patience': 'Gold opens for those who wait, briefly.',
+
+  // Theory subjects.
+  'subject.trees': 'Trees',
+  'subject.roots': 'Roots',
+  'subject.colors': 'Colours',
+  'subject.stillness': 'Standing still',
+  'subject.footprints': 'Footprints',
+  'subject.togetherness': 'Staying close',
+  'subject.gold': 'The gold',
+};
