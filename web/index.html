@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Dreamogic — Shared Dream Chambers</title>
+  </head>
+  <body>
+    <main id="app" class="app-shell">
+      <div id="canvas-mount" class="canvas-mount" aria-label="3D Dream Dungeon Diorama"></div>
+      <div id="live-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+      <div id="toast-banner" class="toast-banner" role="status" aria-live="polite" hidden></div>
+
+      <!-- Top Floating HUD + Whisper Stack -->
+      <div class="top-chrome">
+        <header class="hud-top">
+          <div class="hud-top-left">
+            <button id="btn-home" class="icon-btn" type="button" aria-label="Return to title menu" hidden>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <div class="brand-crest" id="hud-brand-crest" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+                <path d="M46 18A18 18 0 1 1 22 44a14 14 0 0 0 24-26Z" fill="#FFD166" opacity="0.35"/>
+                <path d="M18 50V30a14 14 0 0 1 28 0v20" stroke="#FFD166" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="25" cy="46" r="4" fill="#7BC8A4"/>
+                <circle cx="39" cy="46" r="4" fill="#FFD166"/>
+              </svg>
+            </div>
+            <div class="shard-meta" id="shard-meta">
+              <span class="shard-title" id="hud-shard-title">Dreamogic</span>
+              <span class="shard-sub" id="hud-shard-sub">Offline · Procedural Chambers</span>
+            </div>
+          </div>
+
+          <div class="hud-top-right">
+            <div class="mistake-pips" id="mistake-pips" aria-label="Floor stability" hidden></div>
+            <div class="moonlight-pill" title="Moonlight">
+              <span class="moon-dot" aria-hidden="true"></span>
+              <span id="hud-moonlight" class="tabular">30</span>
+            </div>
+            <button id="btn-avatar" class="icon-btn" type="button" aria-label="Traveler Profile & Look">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </button>
+            <button id="btn-party" class="icon-btn" type="button" aria-label="Party, Friends & Web Invite">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </button>
+            <button id="btn-journal" class="icon-btn" type="button" aria-label="Journal of Truths">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+            </button>
+            <button id="btn-settings" class="icon-btn" type="button" aria-label="Settings">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.85 1 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Whisper, Gold Gauge & Partner Debate Stack -->
+        <section id="gameplay-whispers" class="whisper-stack" hidden>
+          <div class="whisper-card" id="whisper-card">
+            <div class="whisper-label">
+              <span>The Stranger’s Warning</span>
+              <div class="whisper-actions">
+                <button id="btn-solo-theory" class="tiny-link" type="button" hidden>Set Theory</button>
+                <button id="btn-whisper-collapse" class="tiny-link" type="button">Hide</button>
+              </div>
+            </div>
+            <div id="whisper-lines" class="whisper-lines"></div>
+            <div id="whisper-hint-line" class="whisper-hint" hidden></div>
+          </div>
+
+          <div class="partner-bubble" id="partner-bubble">
+            <div class="partner-bubble-head">
+              <span class="partner-dot" id="partner-dot" aria-hidden="true"></span>
+              <strong id="partner-label">Partner</strong>
+              <span id="theory-locked-badge" class="theory-badge" hidden></span>
+              <button id="btn-open-debate" class="tiny-link" type="button">Set Theory</button>
+            </div>
+            <p id="partner-thought-text" class="partner-thought"></p>
+            <p id="partner-thought-echo" class="mother-echo" hidden></p>
+          </div>
+
+          <div class="gold-hud-pill" id="gold-hud-pill" hidden>
+            <div class="gold-hud-row">
+              <span id="gold-hud-label">Gold Reservoir</span>
+              <span id="gold-hud-pct" class="tabular">100%</span>
+            </div>
+            <div class="gold-track">
+              <div id="gold-track-fill" class="gold-track-fill"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- First-Time Onboarding Overlay (Lore + Username + Mother Tongue) -->
+      <section id="onboarding-overlay" class="onboarding-overlay" hidden>
+        <div class="onboarding-card">
+          <div class="onboarding-logo">
+            <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <rect width="64" height="64" rx="16" fill="#25204D"/>
+              <path d="M46 18A18 18 0 1 1 22 44a14 14 0 0 0 24-26Z" fill="#FFD166" opacity="0.32"/>
+              <path d="M18 50V30a14 14 0 0 1 28 0v20" stroke="#FFD166" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="25" cy="46" r="3.5" fill="#7BC8A4"/>
+              <circle cx="39" cy="46" r="3.5" fill="#FFD166"/>
+            </svg>
+            <div>
+              <p class="result-eyebrow">Enter the Threshold</p>
+              <h2 class="result-title">Welcome to Dreamogic</h2>
+            </div>
+          </div>
+
+          <div id="onb-step-1" class="onb-step">
+            <p class="result-desc">
+              Every night you step into an ancient sanctuary hall alongside a companion.
+              A traveler coming from the opposite direction whispers a warning—already half-forgotten.
+            </p>
+            <div class="lore-points">
+              <div class="lore-item">
+                <strong>1. Fading Clues</strong>
+                <span>Watch how tiny trees shrink, roots lean, or stone glow shifts across the hall.</span>
+              </div>
+              <div class="lore-item">
+                <strong>2. Shared Debate</strong>
+                <span>Every warning has rival readings. Test, pin hunches, and agree before risking collapse.</span>
+              </div>
+              <div class="lore-item">
+                <strong>3. Draining Gold</strong>
+                <span>Step into molten gold basins at the exit before the gold pours empty and seals the arch.</span>
+              </div>
+            </div>
+            <div class="result-actions">
+              <button id="btn-onb-next" class="btn-primary" type="button">Claim Your Name →</button>
+              <button id="btn-onb-skip" class="btn-secondary" type="button">Skip Intro</button>
+            </div>
+          </div>
+
+          <form id="onb-step-2" class="onb-step" hidden>
+            <div>
+              <label for="onb-name" class="field-label">Traveler Username</label>
+              <input id="onb-name" type="text" class="text-input" maxlength="16" placeholder="e.g. Aiden, Meera, Kabir" required />
+            </div>
+            <div>
+              <label for="onb-mother" class="field-label">Mother Tongue (heard faintly in whispers)</label>
+              <select id="onb-mother" class="select-input" style="width: 100%;"></select>
+            </div>
+            <div>
+              <span class="field-label">Starter Cloak Pigment</span>
+              <div id="onb-palette-opts" class="chip-grid"></div>
+            </div>
+            <div class="result-actions">
+              <button class="btn-primary" type="submit">Begin First Dream</button>
+              <button id="btn-onb-back" class="btn-secondary" type="button">← Back</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Landing Title Overlay -->
+      <section id="title-overlay" class="title-overlay">
+        <div class="title-panel">
+          <div class="title-emblem-row">
+            <svg width="42" height="42" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <path d="M46 18A18 18 0 1 1 22 44a14 14 0 0 0 24-26Z" fill="#FFD166" opacity="0.35"/>
+              <path d="M18 50V30a14 14 0 0 1 28 0v20" stroke="#FFD166" stroke-width="4.5" stroke-linecap="round"/>
+              <circle cx="25" cy="46" r="4" fill="#7BC8A4"/>
+              <circle cx="39" cy="46" r="4" fill="#FFD166"/>
+            </svg>
+            <h1 class="display-title">Dreamogic</h1>
+          </div>
+          <p class="title-tagline">
+            Decode half-forgotten warnings with your party across shifting dungeon halls before the molten gold runs dry.
+          </p>
+
+          <div class="mode-strip" id="title-mode-strip" role="group" aria-label="Party Setup">
+            <button class="mode-chip" data-mode="solo-ai" type="button">Solo + AI</button>
+            <button class="mode-chip" data-mode="solo-pure" type="button">Pure Solo</button>
+            <button class="mode-chip" data-mode="couch-duo" type="button">2P Couch</button>
+            <button class="mode-chip" data-mode="room-group" type="button">Web Room</button>
+            <button class="mode-chip" data-mode="room-random" type="button">Random</button>
+          </div>
+
+          <div class="title-actions">
+            <button id="btn-play-continue" class="btn-primary" type="button">
+              Enter <span id="continue-shard-label">1-1</span>
+            </button>
+            <button id="btn-open-story" class="btn-secondary" type="button">Chapters (24)</button>
+            <button id="btn-play-daily" class="btn-secondary" type="button">Daily Dream</button>
+            <button id="btn-open-forge" class="btn-secondary" type="button">Dream Forge</button>
+          </div>
+          <p class="controls-hint" id="party-summary-line">
+            Tap any floor slab or use Arrows/WASD · Right-click to pin a hunch
+          </p>
+        </div>
+      </section>
+
+      <!-- Bottom Gameplay Action Dock -->
+      <footer id="hud-bottom" class="hud-bottom" hidden>
+        <div class="dock-group">
+          <button id="btn-pawn-switch" class="dock-pill" type="button" title="Switch active traveler (Tab)">
+            <span class="pawn-swatch" id="active-pawn-swatch"></span>
+            <span id="active-pawn-label">Moving: You</span>
+          </button>
+          <button id="btn-mode-cycle" class="dock-pill" type="button" title="Switch mode, invite link, or Shared Hall">
+            <span id="playmode-label">Solo + AI</span>
+          </button>
+        </div>
+
+        <div class="dock-group">
+          <button id="btn-hunch-cycle" class="dock-pill" type="button" title="Cycle click-to-pin Hunch tool">
+            <span id="hunch-label">Pin: Move</span>
+          </button>
+          <button id="btn-lens" class="dock-pill dock-accent" type="button" title="Hold Space or press to inspect faint shoots & roots">
+            Lucid Lens
+          </button>
+          <button id="btn-hint" class="dock-pill" type="button" hidden>
+            Second Whisper
+          </button>
+        </div>
+      </footer>
+
+      <!-- Void / Win Result Overlay -->
+      <section id="result-overlay" class="result-overlay" hidden>
+        <div class="result-card">
+          <p id="result-eyebrow" class="result-eyebrow"></p>
+          <h2 id="result-title" class="result-title"></h2>
+          <p id="result-desc" class="result-desc"></p>
+          <p id="result-truth" class="result-truth" hidden></p>
+          <div id="result-stats" class="result-stats"></div>
+          <div class="result-actions">
+            <button id="btn-result-primary" class="btn-primary" type="button">Re-enter Chamber</button>
+            <button id="btn-result-secondary" class="btn-secondary" type="button">Debate Theory</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Traveler Customization Dialog -->
+    <dialog id="dlg-avatar" class="dream-dialog" aria-labelledby="dlg-avatar-title">
+      <div class="dialog-head">
+        <h2 id="dlg-avatar-title">Traveler Profile & Look</h2>
+        <button class="icon-btn" data-close-dialog="dlg-avatar" type="button" aria-label="Close customization">✕</button>
+      </div>
+      <div class="debate-grid">
+        <div>
+          <label for="av-name" class="field-label">Traveler Username (<span id="av-tag-display" class="tabular"></span>)</label>
+          <input id="av-name" type="text" class="text-input" maxlength="16" placeholder="Dreamer" style="width: 100%;" />
+        </div>
+        <div>
+          <span class="field-label">Headwear</span>
+          <div id="av-head-opts" class="chip-grid"></div>
+        </div>
+        <div>
+          <span class="field-label">Cloak Silhouette</span>
+          <div id="av-cloak-opts" class="chip-grid"></div>
+        </div>
+        <div>
+          <span class="field-label">Dream Pigment</span>
+          <div id="av-palette-opts" class="chip-grid"></div>
+        </div>
+        <div>
+          <span class="field-label">Carried Charm</span>
+          <div id="av-charm-opts" class="chip-grid"></div>
+        </div>
+      </div>
+      <div class="dialog-foot" style="justify-content: space-between;">
+        <button id="btn-replay-intro" class="btn-secondary" type="button">Replay Lore Intro</button>
+        <button class="btn-primary" data-close-dialog="dlg-avatar" type="button">Save Look</button>
+      </div>
+    </dialog>
+
+    <!-- Party, Friends, Web Invite Codes & Shared Hall Dialog -->
+    <dialog id="dlg-party" class="dream-dialog" aria-labelledby="dlg-party-title">
+      <div class="dialog-head">
+        <h2 id="dlg-party-title">Party & Web Multiplayer</h2>
+        <button class="icon-btn" data-close-dialog="dlg-party" type="button" aria-label="Close party menu">✕</button>
+      </div>
+
+      <div class="debate-grid">
+        <div>
+          <span class="field-label">Switch Play Mode</span>
+          <div id="party-mode-chips" class="chip-grid"></div>
+        </div>
+
+        <div class="forge-preview">
+          <div class="shard-row-title">Web Room Invite (WebRTC P2P + Local Relay)</div>
+          <p class="chapter-intro">Host a room and copy the invite link to play together across devices once hosted on Vercel, or across tabs locally.</p>
+          <div class="forge-row">
+            <input id="party-room-input" type="text" class="text-input" placeholder="Code e.g. D4K-92M" autocomplete="off" />
+            <button id="btn-room-join" class="btn-secondary" type="button">Join Code</button>
+            <button id="btn-room-host" class="btn-primary" type="button">Host New</button>
+          </div>
+          <div id="party-share-row" class="result-actions" style="margin-top: 10px;" hidden>
+            <button id="btn-copy-invite" class="btn-secondary" type="button">Copy Invite Link</button>
+          </div>
+          <p id="party-room-status" class="whisper-hint" hidden></p>
+        </div>
+
+        <div class="forge-preview">
+          <div class="shard-row-title">Random Match & Shared Hall</div>
+          <div class="result-actions">
+            <button id="btn-match-random" class="btn-secondary" type="button">Pair With Wandering Traveler</button>
+          </div>
+          <label class="setting-row" for="set-shared-hall" style="margin-top: 10px;">
+            <span>Shared Hall (another unrelated party explores the same floor & gold!)</span>
+            <input id="set-shared-hall" type="checkbox" class="toggle-check" />
+          </label>
+        </div>
+
+        <div>
+          <h3 class="sub-heading">Friends Roster</h3>
+          <form id="friend-add-form" class="forge-row" style="margin-bottom: 10px;">
+            <label for="friend-name-input" class="sr-only">Friend Name</label>
+            <input id="friend-name-input" type="text" class="text-input" placeholder="Name" maxlength="14" />
+            <label for="friend-tag-input" class="sr-only">Friend Tag</label>
+            <input id="friend-tag-input" type="text" class="text-input" placeholder="Tag e.g. MAYA#305" maxlength="16" />
+            <button class="btn-secondary" type="submit">Add</button>
+          </form>
+          <div id="friends-list" class="anchored-list"></div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Chapters Dialog -->
+    <dialog id="dlg-story" class="dream-dialog" aria-labelledby="dlg-story-title">
+      <div class="dialog-head">
+        <h2 id="dlg-story-title">The Lullaby — Story Chambers</h2>
+        <button class="icon-btn" data-close-dialog="dlg-story" type="button" aria-label="Close chapters">✕</button>
+      </div>
+      <div id="chapter-tabs" class="chapter-tabs" role="tablist"></div>
+      <p id="chapter-intro" class="chapter-intro"></p>
+      <div id="shard-list" class="shard-list"></div>
+    </dialog>
+
+    <!-- Dream Forge Dialog -->
+    <dialog id="dlg-forge" class="dream-dialog" aria-labelledby="dlg-forge-title">
+      <div class="dialog-head">
+        <h2 id="dlg-forge-title">Dream Forge</h2>
+        <button class="icon-btn" data-close-dialog="dlg-forge" type="button" aria-label="Close Dream Forge">✕</button>
+      </div>
+      <form id="forge-form" class="forge-form">
+        <label for="forge-input" class="field-label">Whisper a word, memory, or seed code</label>
+        <div class="forge-row">
+          <input id="forge-input" type="text" class="text-input" placeholder="e.g. SANCTUARY, MONSOON, 7KQ2-M9XD" autocomplete="off" />
+          <button class="btn-primary" type="submit">Forge</button>
+        </div>
+      </form>
+      <div id="forge-preview" class="forge-preview"></div>
+      <h3 class="sub-heading">Anchored Dreams</h3>
+      <div id="anchored-list" class="anchored-list"></div>
+    </dialog>
+
+    <!-- Journal Dialog -->
+    <dialog id="dlg-journal" class="dream-dialog" aria-labelledby="dlg-journal-title">
+      <div class="dialog-head">
+        <h2 id="dlg-journal-title">Journal of Truths</h2>
+        <button class="icon-btn" data-close-dialog="dlg-journal" type="button" aria-label="Close journal">✕</button>
+      </div>
+      <p id="journal-count" class="chapter-intro"></p>
+      <div id="journal-list" class="journal-list"></div>
+    </dialog>
+
+    <!-- Debate / Theory Dialog -->
+    <dialog id="dlg-debate" class="dream-dialog" aria-labelledby="dlg-debate-title">
+      <div class="dialog-head">
+        <h2 id="dlg-debate-title">Lock Working Theory</h2>
+        <button class="icon-btn" data-close-dialog="dlg-debate" type="button" aria-label="Close theory panel">✕</button>
+      </div>
+      <p class="chapter-intro">Lock in your deduction for bonus Moonlight if proven true.</p>
+      <div class="debate-grid">
+        <div>
+          <span class="field-label">Chamber Floor Rule</span>
+          <div id="debate-path-opts" class="chip-grid"></div>
+        </div>
+        <div>
+          <span class="field-label">Gold Basin Behavior</span>
+          <div id="debate-gate-opts" class="chip-grid"></div>
+        </div>
+      </div>
+      <div class="dialog-foot">
+        <button id="btn-save-debate" class="btn-primary" type="button">Lock Theory</button>
+      </div>
+    </dialog>
+
+    <!-- Settings Dialog -->
+    <dialog id="dlg-settings" class="dream-dialog" aria-labelledby="dlg-settings-title">
+      <div class="dialog-head">
+        <h2 id="dlg-settings-title">Dream Settings</h2>
+        <button class="icon-btn" data-close-dialog="dlg-settings" type="button" aria-label="Close settings">✕</button>
+      </div>
+      <div class="settings-list">
+        <label class="setting-row" for="set-lang">
+          <span>Primary Language</span>
+          <select id="set-lang" class="select-input"></select>
+        </label>
+        <label class="setting-row" for="set-mother-lang">
+          <span>Mother Tongue</span>
+          <select id="set-mother-lang" class="select-input"></select>
+        </label>
+        <label class="setting-row" for="set-mother-on">
+          <span>Weave Mother Tongue Echoes</span>
+          <input id="set-mother-on" type="checkbox" class="toggle-check" />
+        </label>
+        <label class="setting-row" for="set-sound">
+          <span>Ambient Chimes & Sound</span>
+          <input id="set-sound" type="checkbox" class="toggle-check" />
+        </label>
+        <label class="setting-row" for="set-slow">
+          <span>Slow Dream Mode (gentler gold & stillness timers)</span>
+          <input id="set-slow" type="checkbox" class="toggle-check" />
+        </label>
+        <label class="setting-row" for="set-lowgpu">
+          <span>Integrated GPU / Battery Saver</span>
+          <input id="set-lowgpu" type="checkbox" class="toggle-check" />
+        </label>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

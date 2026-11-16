@@ -1,0 +1,30 @@
+:root {
+  --h: 268;
+  --bg-void: oklch(0.14 0.032 var(--h));
+  --surface-stone: oklch(0.20 0.036 var(--h) / 0.88);
+  --surface-elevated: oklch(0.25 0.04 var(--h));
+  --surface-well: oklch(0.16 0.03 var(--h));
+  --border-hairline: oklch(0.35 0.035 var(--h) / 0.72);
+  --border-interactive: oklch(0.52 0.045 var(--h));
+
+  --ink-1: oklch(0.95 0.016 84);
+  --ink-2: oklch(0.83 0.022 var(--h));
+  --ink-3: oklch(0.71 0.025 var(--h));
+
+  --accent-gold: oklch(0.84 0.155 82);
+  --accent-gold-ink: oklch(0.18 0.04 75);
+  --accent-mint: oklch(0.78 0.095 162);
+  --accent-coral: oklch(0.72 0.165 22);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+
+  --r-control: 12px;
+  --r-card: 18px;
+  --r-dialog: 22px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --t-fast: 120ms;
+  --t-ui: 200ms;
+}
